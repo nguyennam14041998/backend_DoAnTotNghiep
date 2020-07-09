@@ -31,9 +31,6 @@ entity Hocham{
         Tenhocham String,
         Sudung Integer
 }
-entity Detaitobaibao{
-	Sudung Integer	
-}
 entity Nhansu{
 		Manhansu String,
         Tennhansu String,
@@ -41,7 +38,7 @@ entity Nhansu{
         Email String,
         Diachi String,
         Namsinh Integer,
-	Ngaysinh LocalDate,
+		Ngaysinh LocalDate,
         Sudung Integer
 }
 entity Nhansuthamgia{
@@ -79,7 +76,7 @@ entity Detai{
         Xeploai Integer,
         Trangthai Integer,
         Tenchunhiem String,
-        Nhansuthamgia String,
+        Nhansu String,
         Sudung Integer
 }
 entity DutoanKP{
@@ -115,6 +112,9 @@ entity DanhgiaCT{
 		Diem Integer,
         Sudung Integer
         
+}
+entity Detaitobaibao{
+	Sudung Integer
 }
 entity Hoidongdanhgia{
 		Mahoidong String,
@@ -158,7 +158,7 @@ entity Nhansutobaibao{
 	Sudung Integer
 } 
 relationship OneToMany{ 
-	Donvi to Nhansu,
+		Donvi to Nhansu,
         Chucdanh to Nhansu,
         Hocham to Nhansu,
         Linhvuc to Detai,
@@ -177,11 +177,10 @@ relationship OneToMany{
 	Coquanphoihop to Coquanphoihopthamgia,
 Detai to Danhgia,
 Detai to DutoanKP,
-Detai to Detaitobaibao,
-Danhsachbaibao to Detaitobaibao,
 Danhsachbaibao to Nhansutobaibao,
-Nhansu to Nhansutobaibao
-	
+Nhansu to Nhansutobaibao,
+Detai to Detaitobaibao,
+Danhsachbaibao to Detaitobaibao
 }
 dto all with mapstruct
 filter all

@@ -1,0 +1,35 @@
+{
+    "name": "Detaitobaibao",
+    "fields": [
+        {
+            "fieldName": "sudung",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "detai",
+            "otherEntityRelationshipName": "detaitobaibao",
+            "relationshipName": "detai",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "danhsachbaibao",
+            "otherEntityRelationshipName": "detaitobaibao",
+            "relationshipName": "danhsachbaibao",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200709150652",
+    "entityTableName": "detaitobaibao",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
