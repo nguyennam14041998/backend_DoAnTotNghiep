@@ -20,6 +20,16 @@ public class DutoanKPDTO implements Serializable {
 
     private Long detaiId;
 
+    private Long tongTien;
+
+    public Long getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(Long tongTien) {
+        this.tongTien = tongTien;
+    }
+
     public Long getId() {
         return id;
     }

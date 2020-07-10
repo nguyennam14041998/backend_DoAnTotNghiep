@@ -1,5 +1,6 @@
 package com.api.backend.service;
 
+import com.api.backend.domain.Detaitobaibao;
 import com.api.backend.service.dto.DetaitobaibaoDTO;
 
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public interface DetaitobaibaoService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<DetaitobaibaoDTO> findOne(Long id);
+    Optional<Detaitobaibao> findOne(Long id);
 
     /**
      * Delete the "id" detaitobaibao.

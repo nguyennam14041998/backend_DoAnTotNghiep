@@ -70,10 +70,10 @@ public class NhansutobaibaoServiceImpl implements NhansutobaibaoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<NhansutobaibaoDTO> findOne(Long id) {
+    public Optional<Nhansutobaibao> findOne(Long id) {
         log.debug("Request to get Nhansutobaibao : {}", id);
-        return nhansutobaibaoRepository.findById(id)
-            .map(nhansutobaibaoMapper::toDto);
+        return nhansutobaibaoRepository.findById(id);
+//            .map(nhansutobaibaoMapper::toDto);
     }
 
     /**

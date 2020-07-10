@@ -28,7 +28,7 @@ public class DutoanKPCT implements Serializable {
     private Integer mucchi;
 
     @Column(name = "tong")
-    private Integer tong;
+    private Long tong;
 
     @Column(name = "sudung")
     private Integer sudung;
@@ -72,16 +72,16 @@ public class DutoanKPCT implements Serializable {
         this.mucchi = mucchi;
     }
 
-    public Integer getTong() {
+    public Long getTong() {
         return tong;
     }
 
-    public DutoanKPCT tong(Integer tong) {
+    public DutoanKPCT tong(Long tong) {
         this.tong = tong;
         return this;
     }
 
-    public void setTong(Integer tong) {
+    public void setTong(Long tong) {
         this.tong = tong;
     }
 

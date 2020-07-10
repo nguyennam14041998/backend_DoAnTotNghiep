@@ -70,10 +70,10 @@ public class DetaitobaibaoServiceImpl implements DetaitobaibaoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<DetaitobaibaoDTO> findOne(Long id) {
+    public Optional<Detaitobaibao> findOne(Long id) {
         log.debug("Request to get Detaitobaibao : {}", id);
-        return detaitobaibaoRepository.findById(id)
-            .map(detaitobaibaoMapper::toDto);
+        return detaitobaibaoRepository.findById(id);
+//            .map(detaitobaibaoMapper::toDto);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.api.backend.web.rest;
 
+import com.api.backend.domain.Detaitobaibao;
 import com.api.backend.service.DetaitobaibaoService;
 import com.api.backend.web.rest.errors.BadRequestAlertException;
 import com.api.backend.service.dto.DetaitobaibaoDTO;
@@ -99,9 +100,9 @@ public class DetaitobaibaoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of detaitobaibaos in body.
      */
     @GetMapping("/detaitobaibaos")
-    public ResponseEntity<List<DetaitobaibaoDTO>> getAllDetaitobaibaos(DetaitobaibaoCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<Detaitobaibao>> getAllDetaitobaibaos(DetaitobaibaoCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Detaitobaibaos by criteria: {}", criteria);
-        Page<DetaitobaibaoDTO> page = detaitobaibaoQueryService.findByCriteria(criteria, pageable);
+        Page<Detaitobaibao> page = detaitobaibaoQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -125,9 +126,9 @@ public class DetaitobaibaoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the detaitobaibaoDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/detaitobaibaos/{id}")
-    public ResponseEntity<DetaitobaibaoDTO> getDetaitobaibao(@PathVariable Long id) {
+    public ResponseEntity<Detaitobaibao> getDetaitobaibao(@PathVariable Long id) {
         log.debug("REST request to get Detaitobaibao : {}", id);
-        Optional<DetaitobaibaoDTO> detaitobaibaoDTO = detaitobaibaoService.findOne(id);
+        Optional<Detaitobaibao> detaitobaibaoDTO = detaitobaibaoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(detaitobaibaoDTO);
     }
 

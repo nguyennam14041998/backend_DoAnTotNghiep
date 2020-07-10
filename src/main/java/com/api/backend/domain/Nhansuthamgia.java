@@ -31,11 +31,11 @@ public class Nhansuthamgia implements Serializable {
     private Integer sudung;
 
     @ManyToOne
-    @JsonIgnoreProperties("nhansuthamgias")
+    @JsonIgnoreProperties(value = {"nhansuthamgias","donvi","chucdanh","hocham"})
     private Nhansu nhansu;
 
     @ManyToOne
-    @JsonIgnoreProperties("nhansuthamgias")
+    @JsonIgnoreProperties(value = {"nhansuthamgias","linhvuc","capdetai","hoidongdanhgia"})
     private Detai detai;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

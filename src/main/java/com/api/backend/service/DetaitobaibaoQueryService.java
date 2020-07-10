@@ -61,11 +61,11 @@ public class DetaitobaibaoQueryService extends QueryService<Detaitobaibao> {
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public Page<DetaitobaibaoDTO> findByCriteria(DetaitobaibaoCriteria criteria, Pageable page) {
+    public Page<Detaitobaibao> findByCriteria(DetaitobaibaoCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Detaitobaibao> specification = createSpecification(criteria);
-        return detaitobaibaoRepository.findAll(specification, page)
-            .map(detaitobaibaoMapper::toDto);
+        return detaitobaibaoRepository.findAll(specification, page);
+//            .map(detaitobaibaoMapper::toDto);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.api.backend.web.rest;
 
+import com.api.backend.domain.Nhansutobaibao;
 import com.api.backend.service.NhansutobaibaoService;
 import com.api.backend.web.rest.errors.BadRequestAlertException;
 import com.api.backend.service.dto.NhansutobaibaoDTO;
@@ -99,9 +100,9 @@ public class NhansutobaibaoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of nhansutobaibaos in body.
      */
     @GetMapping("/nhansutobaibaos")
-    public ResponseEntity<List<NhansutobaibaoDTO>> getAllNhansutobaibaos(NhansutobaibaoCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<Nhansutobaibao>> getAllNhansutobaibaos(NhansutobaibaoCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Nhansutobaibaos by criteria: {}", criteria);
-        Page<NhansutobaibaoDTO> page = nhansutobaibaoQueryService.findByCriteria(criteria, pageable);
+        Page<Nhansutobaibao> page = nhansutobaibaoQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -125,9 +126,9 @@ public class NhansutobaibaoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the nhansutobaibaoDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/nhansutobaibaos/{id}")
-    public ResponseEntity<NhansutobaibaoDTO> getNhansutobaibao(@PathVariable Long id) {
+    public ResponseEntity<Nhansutobaibao> getNhansutobaibao(@PathVariable Long id) {
         log.debug("REST request to get Nhansutobaibao : {}", id);
-        Optional<NhansutobaibaoDTO> nhansutobaibaoDTO = nhansutobaibaoService.findOne(id);
+        Optional<Nhansutobaibao> nhansutobaibaoDTO = nhansutobaibaoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(nhansutobaibaoDTO);
     }
 

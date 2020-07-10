@@ -25,7 +25,7 @@ public class Detaitobaibao implements Serializable {
     private Integer sudung;
 
     @ManyToOne
-    @JsonIgnoreProperties("detaitobaibaos")
+    @JsonIgnoreProperties(value = {"detaitobaibaos","capdetai","hoidongdanhgia","linhvuc"})
     private Detai detai;
 
     @ManyToOne

@@ -15,6 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "dutoan_kp")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@JsonIgnoreProperties(value = {"dutoanKPCTS"})
 public class DutoanKP implements Serializable {
 
     private static final long serialVersionUID = 1L;

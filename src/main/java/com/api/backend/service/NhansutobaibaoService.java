@@ -1,5 +1,6 @@
 package com.api.backend.service;
 
+import com.api.backend.domain.Nhansutobaibao;
 import com.api.backend.service.dto.NhansutobaibaoDTO;
 
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public interface NhansutobaibaoService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<NhansutobaibaoDTO> findOne(Long id);
+    Optional<Nhansutobaibao> findOne(Long id);
 
     /**
      * Delete the "id" nhansutobaibao.
