@@ -44,6 +44,10 @@ public class NhansutobaibaoResourceIT {
     private static final Integer UPDATED_STT = 2;
     private static final Integer SMALLER_STT = 1 - 1;
 
+    private static final Integer DEFAULT_NAM = 1;
+    private static final Integer UPDATED_NAM = 2;
+    private static final Integer SMALLER_NAM = 1 - 1;
+
     private static final Integer DEFAULT_SUDUNG = 1;
     private static final Integer UPDATED_SUDUNG = 2;
     private static final Integer SMALLER_SUDUNG = 1 - 1;
@@ -100,6 +104,7 @@ public class NhansutobaibaoResourceIT {
     public static Nhansutobaibao createEntity(EntityManager em) {
         Nhansutobaibao nhansutobaibao = new Nhansutobaibao()
             .stt(DEFAULT_STT)
+            .nam(DEFAULT_NAM)
             .sudung(DEFAULT_SUDUNG);
         return nhansutobaibao;
     }
@@ -112,6 +117,7 @@ public class NhansutobaibaoResourceIT {
     public static Nhansutobaibao createUpdatedEntity(EntityManager em) {
         Nhansutobaibao nhansutobaibao = new Nhansutobaibao()
             .stt(UPDATED_STT)
+            .nam(UPDATED_NAM)
             .sudung(UPDATED_SUDUNG);
         return nhansutobaibao;
     }
@@ -138,6 +144,7 @@ public class NhansutobaibaoResourceIT {
         assertThat(nhansutobaibaoList).hasSize(databaseSizeBeforeCreate + 1);
         Nhansutobaibao testNhansutobaibao = nhansutobaibaoList.get(nhansutobaibaoList.size() - 1);
         assertThat(testNhansutobaibao.getStt()).isEqualTo(DEFAULT_STT);
+        assertThat(testNhansutobaibao.getNam()).isEqualTo(DEFAULT_NAM);
         assertThat(testNhansutobaibao.getSudung()).isEqualTo(DEFAULT_SUDUNG);
     }
 
@@ -174,6 +181,7 @@ public class NhansutobaibaoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(nhansutobaibao.getId().intValue())))
             .andExpect(jsonPath("$.[*].stt").value(hasItem(DEFAULT_STT)))
+            .andExpect(jsonPath("$.[*].nam").value(hasItem(DEFAULT_NAM)))
             .andExpect(jsonPath("$.[*].sudung").value(hasItem(DEFAULT_SUDUNG)));
     }
     
@@ -189,6 +197,7 @@ public class NhansutobaibaoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(nhansutobaibao.getId().intValue()))
             .andExpect(jsonPath("$.stt").value(DEFAULT_STT))
+            .andExpect(jsonPath("$.nam").value(DEFAULT_NAM))
             .andExpect(jsonPath("$.sudung").value(DEFAULT_SUDUNG));
     }
 
@@ -314,6 +323,111 @@ public class NhansutobaibaoResourceIT {
 
         // Get all the nhansutobaibaoList where stt is greater than SMALLER_STT
         defaultNhansutobaibaoShouldBeFound("stt.greaterThan=" + SMALLER_STT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam equals to DEFAULT_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.equals=" + DEFAULT_NAM);
+
+        // Get all the nhansutobaibaoList where nam equals to UPDATED_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.equals=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam not equals to DEFAULT_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.notEquals=" + DEFAULT_NAM);
+
+        // Get all the nhansutobaibaoList where nam not equals to UPDATED_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.notEquals=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsInShouldWork() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam in DEFAULT_NAM or UPDATED_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.in=" + DEFAULT_NAM + "," + UPDATED_NAM);
+
+        // Get all the nhansutobaibaoList where nam equals to UPDATED_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.in=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam is not null
+        defaultNhansutobaibaoShouldBeFound("nam.specified=true");
+
+        // Get all the nhansutobaibaoList where nam is null
+        defaultNhansutobaibaoShouldNotBeFound("nam.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam is greater than or equal to DEFAULT_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.greaterThanOrEqual=" + DEFAULT_NAM);
+
+        // Get all the nhansutobaibaoList where nam is greater than or equal to UPDATED_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.greaterThanOrEqual=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam is less than or equal to DEFAULT_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.lessThanOrEqual=" + DEFAULT_NAM);
+
+        // Get all the nhansutobaibaoList where nam is less than or equal to SMALLER_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.lessThanOrEqual=" + SMALLER_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsLessThanSomething() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam is less than DEFAULT_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.lessThan=" + DEFAULT_NAM);
+
+        // Get all the nhansutobaibaoList where nam is less than UPDATED_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.lessThan=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansutobaibaosByNamIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        nhansutobaibaoRepository.saveAndFlush(nhansutobaibao);
+
+        // Get all the nhansutobaibaoList where nam is greater than DEFAULT_NAM
+        defaultNhansutobaibaoShouldNotBeFound("nam.greaterThan=" + DEFAULT_NAM);
+
+        // Get all the nhansutobaibaoList where nam is greater than SMALLER_NAM
+        defaultNhansutobaibaoShouldBeFound("nam.greaterThan=" + SMALLER_NAM);
     }
 
 
@@ -470,6 +584,7 @@ public class NhansutobaibaoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(nhansutobaibao.getId().intValue())))
             .andExpect(jsonPath("$.[*].stt").value(hasItem(DEFAULT_STT)))
+            .andExpect(jsonPath("$.[*].nam").value(hasItem(DEFAULT_NAM)))
             .andExpect(jsonPath("$.[*].sudung").value(hasItem(DEFAULT_SUDUNG)));
 
         // Check, that the count call also returns 1
@@ -519,6 +634,7 @@ public class NhansutobaibaoResourceIT {
         em.detach(updatedNhansutobaibao);
         updatedNhansutobaibao
             .stt(UPDATED_STT)
+            .nam(UPDATED_NAM)
             .sudung(UPDATED_SUDUNG);
         NhansutobaibaoDTO nhansutobaibaoDTO = nhansutobaibaoMapper.toDto(updatedNhansutobaibao);
 
@@ -532,6 +648,7 @@ public class NhansutobaibaoResourceIT {
         assertThat(nhansutobaibaoList).hasSize(databaseSizeBeforeUpdate);
         Nhansutobaibao testNhansutobaibao = nhansutobaibaoList.get(nhansutobaibaoList.size() - 1);
         assertThat(testNhansutobaibao.getStt()).isEqualTo(UPDATED_STT);
+        assertThat(testNhansutobaibao.getNam()).isEqualTo(UPDATED_NAM);
         assertThat(testNhansutobaibao.getSudung()).isEqualTo(UPDATED_SUDUNG);
     }
 

@@ -19,6 +19,9 @@
             <column name="stt" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="nam" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="sudung" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -52,6 +55,7 @@
                   tableName="nhansuthamgia">
             <column name="id" type="numeric"/>
             <column name="stt" type="numeric"/>
+            <column name="nam" type="numeric"/>
             <column name="sudung" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>

@@ -43,6 +43,7 @@ entity Nhansu{
 }
 entity Nhansuthamgia{
 	Stt Integer,
+	Nam Integer,
 	Sudung Integer
 }
 entity Coquanphoihop{
@@ -155,6 +156,7 @@ Tacgiachinh String,
 }
 entity Nhansutobaibao{
 	Stt Integer,
+	Nam Integer,
 	Sudung Integer
 } 
 relationship OneToMany{ 

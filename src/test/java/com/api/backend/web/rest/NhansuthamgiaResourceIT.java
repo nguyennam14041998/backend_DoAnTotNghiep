@@ -44,6 +44,10 @@ public class NhansuthamgiaResourceIT {
     private static final Integer UPDATED_STT = 2;
     private static final Integer SMALLER_STT = 1 - 1;
 
+    private static final Integer DEFAULT_NAM = 1;
+    private static final Integer UPDATED_NAM = 2;
+    private static final Integer SMALLER_NAM = 1 - 1;
+
     private static final Integer DEFAULT_SUDUNG = 1;
     private static final Integer UPDATED_SUDUNG = 2;
     private static final Integer SMALLER_SUDUNG = 1 - 1;
@@ -100,6 +104,7 @@ public class NhansuthamgiaResourceIT {
     public static Nhansuthamgia createEntity(EntityManager em) {
         Nhansuthamgia nhansuthamgia = new Nhansuthamgia()
             .stt(DEFAULT_STT)
+            .nam(DEFAULT_NAM)
             .sudung(DEFAULT_SUDUNG);
         return nhansuthamgia;
     }
@@ -112,6 +117,7 @@ public class NhansuthamgiaResourceIT {
     public static Nhansuthamgia createUpdatedEntity(EntityManager em) {
         Nhansuthamgia nhansuthamgia = new Nhansuthamgia()
             .stt(UPDATED_STT)
+            .nam(UPDATED_NAM)
             .sudung(UPDATED_SUDUNG);
         return nhansuthamgia;
     }
@@ -138,6 +144,7 @@ public class NhansuthamgiaResourceIT {
         assertThat(nhansuthamgiaList).hasSize(databaseSizeBeforeCreate + 1);
         Nhansuthamgia testNhansuthamgia = nhansuthamgiaList.get(nhansuthamgiaList.size() - 1);
         assertThat(testNhansuthamgia.getStt()).isEqualTo(DEFAULT_STT);
+        assertThat(testNhansuthamgia.getNam()).isEqualTo(DEFAULT_NAM);
         assertThat(testNhansuthamgia.getSudung()).isEqualTo(DEFAULT_SUDUNG);
     }
 
@@ -174,6 +181,7 @@ public class NhansuthamgiaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(nhansuthamgia.getId().intValue())))
             .andExpect(jsonPath("$.[*].stt").value(hasItem(DEFAULT_STT)))
+            .andExpect(jsonPath("$.[*].nam").value(hasItem(DEFAULT_NAM)))
             .andExpect(jsonPath("$.[*].sudung").value(hasItem(DEFAULT_SUDUNG)));
     }
     
@@ -189,6 +197,7 @@ public class NhansuthamgiaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(nhansuthamgia.getId().intValue()))
             .andExpect(jsonPath("$.stt").value(DEFAULT_STT))
+            .andExpect(jsonPath("$.nam").value(DEFAULT_NAM))
             .andExpect(jsonPath("$.sudung").value(DEFAULT_SUDUNG));
     }
 
@@ -314,6 +323,111 @@ public class NhansuthamgiaResourceIT {
 
         // Get all the nhansuthamgiaList where stt is greater than SMALLER_STT
         defaultNhansuthamgiaShouldBeFound("stt.greaterThan=" + SMALLER_STT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam equals to DEFAULT_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.equals=" + DEFAULT_NAM);
+
+        // Get all the nhansuthamgiaList where nam equals to UPDATED_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.equals=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam not equals to DEFAULT_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.notEquals=" + DEFAULT_NAM);
+
+        // Get all the nhansuthamgiaList where nam not equals to UPDATED_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.notEquals=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsInShouldWork() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam in DEFAULT_NAM or UPDATED_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.in=" + DEFAULT_NAM + "," + UPDATED_NAM);
+
+        // Get all the nhansuthamgiaList where nam equals to UPDATED_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.in=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam is not null
+        defaultNhansuthamgiaShouldBeFound("nam.specified=true");
+
+        // Get all the nhansuthamgiaList where nam is null
+        defaultNhansuthamgiaShouldNotBeFound("nam.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam is greater than or equal to DEFAULT_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.greaterThanOrEqual=" + DEFAULT_NAM);
+
+        // Get all the nhansuthamgiaList where nam is greater than or equal to UPDATED_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.greaterThanOrEqual=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam is less than or equal to DEFAULT_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.lessThanOrEqual=" + DEFAULT_NAM);
+
+        // Get all the nhansuthamgiaList where nam is less than or equal to SMALLER_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.lessThanOrEqual=" + SMALLER_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsLessThanSomething() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam is less than DEFAULT_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.lessThan=" + DEFAULT_NAM);
+
+        // Get all the nhansuthamgiaList where nam is less than UPDATED_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.lessThan=" + UPDATED_NAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllNhansuthamgiasByNamIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        nhansuthamgiaRepository.saveAndFlush(nhansuthamgia);
+
+        // Get all the nhansuthamgiaList where nam is greater than DEFAULT_NAM
+        defaultNhansuthamgiaShouldNotBeFound("nam.greaterThan=" + DEFAULT_NAM);
+
+        // Get all the nhansuthamgiaList where nam is greater than SMALLER_NAM
+        defaultNhansuthamgiaShouldBeFound("nam.greaterThan=" + SMALLER_NAM);
     }
 
 
@@ -470,6 +584,7 @@ public class NhansuthamgiaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(nhansuthamgia.getId().intValue())))
             .andExpect(jsonPath("$.[*].stt").value(hasItem(DEFAULT_STT)))
+            .andExpect(jsonPath("$.[*].nam").value(hasItem(DEFAULT_NAM)))
             .andExpect(jsonPath("$.[*].sudung").value(hasItem(DEFAULT_SUDUNG)));
 
         // Check, that the count call also returns 1
@@ -519,6 +634,7 @@ public class NhansuthamgiaResourceIT {
         em.detach(updatedNhansuthamgia);
         updatedNhansuthamgia
             .stt(UPDATED_STT)
+            .nam(UPDATED_NAM)
             .sudung(UPDATED_SUDUNG);
         NhansuthamgiaDTO nhansuthamgiaDTO = nhansuthamgiaMapper.toDto(updatedNhansuthamgia);
 
@@ -532,6 +648,7 @@ public class NhansuthamgiaResourceIT {
         assertThat(nhansuthamgiaList).hasSize(databaseSizeBeforeUpdate);
         Nhansuthamgia testNhansuthamgia = nhansuthamgiaList.get(nhansuthamgiaList.size() - 1);
         assertThat(testNhansuthamgia.getStt()).isEqualTo(UPDATED_STT);
+        assertThat(testNhansuthamgia.getNam()).isEqualTo(UPDATED_NAM);
         assertThat(testNhansuthamgia.getSudung()).isEqualTo(UPDATED_SUDUNG);
     }
 

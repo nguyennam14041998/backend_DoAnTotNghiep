@@ -94,6 +94,9 @@ public class NhansutobaibaoQueryService extends QueryService<Nhansutobaibao> {
             if (criteria.getStt() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStt(), Nhansutobaibao_.stt));
             }
+            if (criteria.getNam() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getNam(), Nhansutobaibao_.nam));
+            }
             if (criteria.getSudung() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSudung(), Nhansutobaibao_.sudung));
             }

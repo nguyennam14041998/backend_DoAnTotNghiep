@@ -94,6 +94,9 @@ public class NhansuthamgiaQueryService extends QueryService<Nhansuthamgia> {
             if (criteria.getStt() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getStt(), Nhansuthamgia_.stt));
             }
+            if (criteria.getNam() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getNam(), Nhansuthamgia_.nam));
+            }
             if (criteria.getSudung() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSudung(), Nhansuthamgia_.sudung));
             }

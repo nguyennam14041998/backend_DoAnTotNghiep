@@ -6,6 +6,10 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "nam",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "sudung",
             "fieldType": "Integer"
         }

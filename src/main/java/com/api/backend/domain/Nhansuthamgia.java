@@ -24,6 +24,9 @@ public class Nhansuthamgia implements Serializable {
     @Column(name = "stt")
     private Integer stt;
 
+    @Column(name = "nam")
+    private Integer nam;
+
     @Column(name = "sudung")
     private Integer sudung;
 
@@ -55,6 +58,19 @@ public class Nhansuthamgia implements Serializable {
 
     public void setStt(Integer stt) {
         this.stt = stt;
+    }
+
+    public Integer getNam() {
+        return nam;
+    }
+
+    public Nhansuthamgia nam(Integer nam) {
+        this.nam = nam;
+        return this;
+    }
+
+    public void setNam(Integer nam) {
+        this.nam = nam;
     }
 
     public Integer getSudung() {
@@ -118,6 +134,7 @@ public class Nhansuthamgia implements Serializable {
         return "Nhansuthamgia{" +
             "id=" + getId() +
             ", stt=" + getStt() +
+            ", nam=" + getNam() +
             ", sudung=" + getSudung() +
             "}";
     }

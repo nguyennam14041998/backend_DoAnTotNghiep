@@ -11,6 +11,8 @@ public class NhansutobaibaoDTO implements Serializable {
 
     private Integer stt;
 
+    private Integer nam;
+
     private Integer sudung;
 
 
@@ -32,6 +34,14 @@ public class NhansutobaibaoDTO implements Serializable {
 
     public void setStt(Integer stt) {
         this.stt = stt;
+    }
+
+    public Integer getNam() {
+        return nam;
+    }
+
+    public void setNam(Integer nam) {
+        this.nam = nam;
     }
 
     public Integer getSudung() {
@@ -84,6 +94,7 @@ public class NhansutobaibaoDTO implements Serializable {
         return "NhansutobaibaoDTO{" +
             "id=" + getId() +
             ", stt=" + getStt() +
+            ", nam=" + getNam() +
             ", sudung=" + getSudung() +
             ", danhsachbaibao=" + getDanhsachbaibaoId() +
             ", nhansu=" + getNhansuId() +

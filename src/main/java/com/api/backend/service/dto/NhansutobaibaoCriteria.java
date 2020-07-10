@@ -28,6 +28,8 @@ public class NhansutobaibaoCriteria implements Serializable, Criteria {
 
     private IntegerFilter stt;
 
+    private IntegerFilter nam;
+
     private IntegerFilter sudung;
 
     private LongFilter danhsachbaibaoId;
@@ -40,6 +42,7 @@ public class NhansutobaibaoCriteria implements Serializable, Criteria {
     public NhansutobaibaoCriteria(NhansutobaibaoCriteria other){
         this.id = other.id == null ? null : other.id.copy();
         this.stt = other.stt == null ? null : other.stt.copy();
+        this.nam = other.nam == null ? null : other.nam.copy();
         this.sudung = other.sudung == null ? null : other.sudung.copy();
         this.danhsachbaibaoId = other.danhsachbaibaoId == null ? null : other.danhsachbaibaoId.copy();
         this.nhansuId = other.nhansuId == null ? null : other.nhansuId.copy();
@@ -64,6 +67,14 @@ public class NhansutobaibaoCriteria implements Serializable, Criteria {
 
     public void setStt(IntegerFilter stt) {
         this.stt = stt;
+    }
+
+    public IntegerFilter getNam() {
+        return nam;
+    }
+
+    public void setNam(IntegerFilter nam) {
+        this.nam = nam;
     }
 
     public IntegerFilter getSudung() {
@@ -103,6 +114,7 @@ public class NhansutobaibaoCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(stt, that.stt) &&
+            Objects.equals(nam, that.nam) &&
             Objects.equals(sudung, that.sudung) &&
             Objects.equals(danhsachbaibaoId, that.danhsachbaibaoId) &&
             Objects.equals(nhansuId, that.nhansuId);
@@ -113,6 +125,7 @@ public class NhansutobaibaoCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         stt,
+        nam,
         sudung,
         danhsachbaibaoId,
         nhansuId
@@ -124,6 +137,7 @@ public class NhansutobaibaoCriteria implements Serializable, Criteria {
         return "NhansutobaibaoCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (stt != null ? "stt=" + stt + ", " : "") +
+                (nam != null ? "nam=" + nam + ", " : "") +
                 (sudung != null ? "sudung=" + sudung + ", " : "") +
                 (danhsachbaibaoId != null ? "danhsachbaibaoId=" + danhsachbaibaoId + ", " : "") +
                 (nhansuId != null ? "nhansuId=" + nhansuId + ", " : "") +
