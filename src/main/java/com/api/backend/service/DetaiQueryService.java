@@ -98,6 +98,14 @@ public class DetaiQueryService extends QueryService<Detai> {
             if (criteria.getTen() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTen(), Detai_.ten));
             }
+
+            if (criteria.getPhanLoai() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPhanLoai(), Detai_.phanLoai));
+            }
+            if (criteria.getNguoiHuongDan() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNguoiHuongDan(), Detai_.nguoiHuongDan));
+            }
+
             if (criteria.getThoigiantao() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getThoigiantao(), Detai_.thoigiantao));
             }

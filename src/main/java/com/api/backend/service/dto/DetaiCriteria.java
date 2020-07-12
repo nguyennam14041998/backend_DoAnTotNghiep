@@ -79,7 +79,26 @@ public class DetaiCriteria implements Serializable, Criteria {
 
     private LongFilter hoidongdanhgiaId;
 
+    private IntegerFilter phanLoai;
+    private StringFilter nguoiHuongDan;
+
     public DetaiCriteria(){
+    }
+
+    public IntegerFilter getPhanLoai() {
+        return phanLoai;
+    }
+
+    public void setPhanLoai(IntegerFilter phanLoai) {
+        this.phanLoai = phanLoai;
+    }
+
+    public StringFilter getNguoiHuongDan() {
+        return nguoiHuongDan;
+    }
+
+    public void setNguoiHuongDan(StringFilter nguoiHuongDan) {
+        this.nguoiHuongDan = nguoiHuongDan;
     }
 
     public DetaiCriteria(DetaiCriteria other){
@@ -110,6 +129,9 @@ public class DetaiCriteria implements Serializable, Criteria {
         this.linhvucId = other.linhvucId == null ? null : other.linhvucId.copy();
         this.capdetaiId = other.capdetaiId == null ? null : other.capdetaiId.copy();
         this.hoidongdanhgiaId = other.hoidongdanhgiaId == null ? null : other.hoidongdanhgiaId.copy();
+
+        this.phanLoai = other.phanLoai == null ? null : other.phanLoai.copy();
+        this.nguoiHuongDan = other.nguoiHuongDan == null ? null : other.nguoiHuongDan.copy();
     }
 
     @Override
@@ -370,6 +392,8 @@ public class DetaiCriteria implements Serializable, Criteria {
             Objects.equals(detaitobaibaoId, that.detaitobaibaoId) &&
             Objects.equals(linhvucId, that.linhvucId) &&
             Objects.equals(capdetaiId, that.capdetaiId) &&
+            Objects.equals(phanLoai, that.phanLoai) &&
+            Objects.equals(nguoiHuongDan, that.nguoiHuongDan) &&
             Objects.equals(hoidongdanhgiaId, that.hoidongdanhgiaId);
     }
 
@@ -402,7 +426,8 @@ public class DetaiCriteria implements Serializable, Criteria {
         detaitobaibaoId,
         linhvucId,
         capdetaiId,
-        hoidongdanhgiaId
+        hoidongdanhgiaId,
+            phanLoai, nguoiHuongDan
         );
     }
 
