@@ -5,6 +5,7 @@ import com.api.backend.domain.Detai;
 import com.api.backend.repository.DetaiRepository;
 import com.api.backend.service.dto.DetaiDTO;
 import com.api.backend.service.mapper.DetaiMapper;
+import com.api.backend.service.mapper.MyDeTaiMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,9 +27,9 @@ public class DetaiServiceImpl implements DetaiService {
 
     private final DetaiRepository detaiRepository;
 
-    private final DetaiMapper detaiMapper;
+    private final MyDeTaiMapper detaiMapper;
 
-    public DetaiServiceImpl(DetaiRepository detaiRepository, DetaiMapper detaiMapper) {
+    public DetaiServiceImpl(DetaiRepository detaiRepository, MyDeTaiMapper detaiMapper) {
         this.detaiRepository = detaiRepository;
         this.detaiMapper = detaiMapper;
     }

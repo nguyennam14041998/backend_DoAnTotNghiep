@@ -70,6 +70,28 @@ public class Detai implements Serializable {
     @Column(name = "sudung")
     private Integer sudung;
 
+    @Column(name = "nguoihuongdan")
+    private String nguoiHuongDan;
+
+    @Column(name = "phanloai")
+    private Integer phanLoai;
+
+    public String getNguoiHuongDan() {
+        return nguoiHuongDan;
+    }
+
+    public void setNguoiHuongDan(String nguoiHuongDan) {
+        this.nguoiHuongDan = nguoiHuongDan;
+    }
+
+    public Integer getPhanLoai() {
+        return phanLoai;
+    }
+
+    public void setPhanLoai(Integer phanLoai) {
+        this.phanLoai = phanLoai;
+    }
+
     @OneToMany(mappedBy = "detai")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Tiendo> tiendos = new HashSet<>();

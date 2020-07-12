@@ -47,6 +47,25 @@ public class DetaiDTO implements Serializable {
 
     private Long hoidongdanhgiaId;
 
+    private String nguoiHuongDan;
+    private Integer phanLoai;
+
+    public String getNguoiHuongDan() {
+        return nguoiHuongDan;
+    }
+
+    public void setNguoiHuongDan(String nguoiHuongDan) {
+        this.nguoiHuongDan = nguoiHuongDan;
+    }
+
+    public Integer getPhanLoai() {
+        return phanLoai;
+    }
+
+    public void setPhanLoai(Integer phanLoai) {
+        this.phanLoai = phanLoai;
+    }
+
     public Long getId() {
         return id;
     }

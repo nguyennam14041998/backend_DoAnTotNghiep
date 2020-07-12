@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import com.api.backend.service.mapper.MyDeTaiMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -35,9 +36,9 @@ public class DetaiQueryService extends QueryService<Detai> {
 
     private final DetaiRepository detaiRepository;
 
-    private final DetaiMapper detaiMapper;
+    private final MyDeTaiMapper detaiMapper;
 
-    public DetaiQueryService(DetaiRepository detaiRepository, DetaiMapper detaiMapper) {
+    public DetaiQueryService(DetaiRepository detaiRepository, MyDeTaiMapper detaiMapper) {
         this.detaiRepository = detaiRepository;
         this.detaiMapper = detaiMapper;
     }
